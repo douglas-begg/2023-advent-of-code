@@ -1,0 +1,41 @@
+
+const val MAX_AVAILABLE_RED = 12
+const val MAX_AVAILABLE_GREEN = 13
+const val MAX_AVAILABLE_BLUE = 14
+
+val GREEN_REGEX = Regex("(\\d+) green")
+val BLUE_REGEX = Regex("(\\d+) green")
+val RED_REGEX = Regex("(\\d+) green")
+
+fun main() {
+    fun part1(input: List<String>): Int {
+        val possibleGames = input.map { line ->
+            val maxGreen = GREEN_REGEX.findAll(line).map { it.groupValues[1].toInt() }.max()
+            val maxBlue = BLUE_REGEX.findAll(line).map { it.groupValues[1].toInt() }.max()
+            val maxRed = RED_REGEX.findAll(line).map { it.groupValues[1].toInt() }.max()
+            maxGreen <= MAX_AVAILABLE_GREEN && maxBlue <= MAX_AVAILABLE_BLUE && maxRed <= MAX_AVAILABLE_RED
+        }
+        var totalPossibleGames = 0
+        possibleGames.forEachIndexed { index, possible ->
+            if (possible) {
+                totalPossibleGames += (index + 1)
+            }
+        }
+        return totalPossibleGames
+    }
+
+    fun part2(input: List<String>): Int {
+        val powers = input.map { line ->
+            val maxGreen = GREEN_REGEX.findAll(line).map { it.groupValues[1].toInt() }.max()
+            val maxBlue = BLUE_REGEX.findAll(line).map { it.groupValues[1].toInt() }.max()
+            val maxRed = RED_REGEX.findAll(line).map { it.groupValues[1].toInt() }.max()
+            maxGreen * maxBlue * maxRed
+        }
+        return powers.sum()
+    }
+
+    val input = readInput("day2-input")
+
+    part1(input).println()
+    part2(input).println()
+}
