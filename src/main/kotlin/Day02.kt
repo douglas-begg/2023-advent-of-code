@@ -4,8 +4,8 @@ const val MAX_AVAILABLE_GREEN = 13
 const val MAX_AVAILABLE_BLUE = 14
 
 val GREEN_REGEX = Regex("(\\d+) green")
-val BLUE_REGEX = Regex("(\\d+) green")
-val RED_REGEX = Regex("(\\d+) green")
+val BLUE_REGEX = Regex("(\\d+) blue")
+val RED_REGEX = Regex("(\\d+) red")
 
 fun main() {
     fun part1(input: List<String>): Int {
