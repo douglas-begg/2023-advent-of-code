@@ -9,29 +9,25 @@ val RED_REGEX = Regex("(\\d+) red")
 
 fun main() {
     fun part1(input: List<String>): Int {
-        val possibleGames = input.map { line ->
+        return input.mapIndexed { i, line ->
             val maxGreen = GREEN_REGEX.findAll(line).map { it.groupValues[1].toInt() }.max()
             val maxBlue = BLUE_REGEX.findAll(line).map { it.groupValues[1].toInt() }.max()
             val maxRed = RED_REGEX.findAll(line).map { it.groupValues[1].toInt() }.max()
-            maxGreen <= MAX_AVAILABLE_GREEN && maxBlue <= MAX_AVAILABLE_BLUE && maxRed <= MAX_AVAILABLE_RED
-        }
-        var totalPossibleGames = 0
-        possibleGames.forEachIndexed { index, possible ->
-            if (possible) {
-                totalPossibleGames += (index + 1)
+            if (maxGreen <= MAX_AVAILABLE_GREEN && maxBlue <= MAX_AVAILABLE_BLUE && maxRed <= MAX_AVAILABLE_RED) {
+                i + 1
+            } else {
+                0
             }
-        }
-        return totalPossibleGames
+        }.sum()
     }
 
     fun part2(input: List<String>): Int {
-        val powers = input.map { line ->
+        return input.map { line ->
             val maxGreen = GREEN_REGEX.findAll(line).map { it.groupValues[1].toInt() }.max()
             val maxBlue = BLUE_REGEX.findAll(line).map { it.groupValues[1].toInt() }.max()
             val maxRed = RED_REGEX.findAll(line).map { it.groupValues[1].toInt() }.max()
             maxGreen * maxBlue * maxRed
-        }
-        return powers.sum()
+        }.sum()
     }
 
     val input = readInput("day2-input")
