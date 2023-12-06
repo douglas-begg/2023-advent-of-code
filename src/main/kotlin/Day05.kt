@@ -1,8 +1,6 @@
-import kotlin.math.min
-
-val mappingHeadingRegex = Regex("^(\\w+-to-\\w+) map:$")
-val numberRowRegex = Regex("^(\\d+)\\s(\\d+)\\s(\\d+)$")
-val seedsRegex = Regex("^seeds: [(\\d+)|\\s]+")
+private val mappingHeadingRegex = Regex("^(\\w+-to-\\w+) map:$")
+private val numberRowRegex = Regex("^(\\d+)\\s(\\d+)\\s(\\d+)$")
+private val seedsRegex = Regex("^seeds: [(\\d+)|\\s]+")
 
 fun main() {
 
@@ -85,15 +83,12 @@ fun main() {
 
     fun part2(input: List<String>): Long {
         initialize(input)
-        var nearestLocation = Long.MAX_VALUE
-
-        "(\\d+\\s\\d+)".toRegex().findAll(seedsString).map { matchResult ->
+        return "(\\d+\\s\\d+)".toRegex().findAll(seedsString).map { matchResult ->
             val split = matchResult.groupValues[1].split(' ')
             LongRange(split[0].toLong(), split[0].toLong() + split[1].toLong() - 1)
-        }.forEach { seedRange ->
-            seedRange.forEach { nearestLocation = min(nearestLocation, retrieveLocationForSeed(it)) }
+        }.minOf { seedRange ->
+            seedRange.minOf { retrieveLocationForSeed(it) }
         }
-        return nearestLocation
     }
 
     val input = readInput("day5-input")

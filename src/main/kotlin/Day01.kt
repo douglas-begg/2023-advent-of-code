@@ -1,4 +1,4 @@
-val numberDict = mapOf(
+private val numberDict = mapOf(
     "one" to "1",
     "two" to "2",
     "three" to "3",
@@ -19,7 +19,7 @@ val numberDict = mapOf(
     "9" to "9"
 )
 
-val reverseNumberDict = mapOf(
+private val reverseNumberDict = mapOf(
     "eno" to "1",
     "owt" to "2",
     "eerht" to "3",
